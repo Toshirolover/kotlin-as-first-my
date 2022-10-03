@@ -269,7 +269,7 @@ fun cos(x: Double, eps: Double): Double {
  *
  * Использовать операции со строками в этой задаче запрещается.
  */
-fun squareSequenceDigit(n: Int) = universal(n) { n -> sqr(n).toInt() }
+fun squareSequenceDigit(n: Int) = fullNum(n) { n -> sqr(n).toInt() }
 
 /**
  * Сложная (5 баллов)
@@ -280,8 +280,8 @@ fun squareSequenceDigit(n: Int) = universal(n) { n -> sqr(n).toInt() }
  *
  * Использовать операции со строками в этой задаче запрещается.
  */
-fun fibSequenceDigit(n: Int): Int = universal(n) { n -> fib(n) }
-fun universal(n: Int, fnk: (n: Int) -> Int): Int {
+fun fibSequenceDigit(n: Int): Int = fullNum(n) { n -> fib(n) }
+fun fullNum(n: Int, fnk: (n: Int) -> Int): Int {
     var count = 1
     var sum = 0
     var num = 0
