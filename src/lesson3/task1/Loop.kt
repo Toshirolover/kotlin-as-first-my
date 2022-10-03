@@ -269,7 +269,7 @@ fun cos(x: Double, eps: Double): Double {
  *
  * Использовать операции со строками в этой задаче запрещается.
  */
-fun squareSequenceDigit(n: Int) = fullNum(n) { n -> sqr(n).toInt() }
+fun squareSequenceDigit(n: Int) = fullNum(n) { n -> sqr(n) }
 /**
  * Сложная (5 баллов)
  *
