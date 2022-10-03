@@ -74,13 +74,14 @@ fun digitCountInNumber(n: Int, m: Int): Int =
  * Использовать операции со строками в этой задаче запрещается.
  */
 fun digitNumber(n: Int): Int {
-    var score = 0
-    var number = n
-    do {
-        score++
-        number /= 10
-    } while (number > 0)
-    return score
+    if (n == 0) return 1
+    var num = n
+    var result = 0
+    while (num != 0) {
+        result += 1
+        num /= 10
+    }
+    return result
 }
 
 /**
@@ -135,16 +136,15 @@ fun maxDivisor(n: Int): Int {
  * этого для какого-либо начального X > 0.
  */
 fun collatzSteps(x: Int): Int {
-    var motions = 0
-    var newX = x
-    while (newX != 1) {
-        motions++
-        if (newX % 2 == 0) newX /= 2
-        else newX = x * 3 + 1
+    var firstN = x
+    var num = 0
+    while (firstN != 1) {
+        if (firstN % 2 == 0) firstN /= 2
+        else firstN = firstN * 3 + 1
+        num += 1
     }
-    return motions
+    return num
 }
-
 /**
  * Средняя (3 балла)
  *
