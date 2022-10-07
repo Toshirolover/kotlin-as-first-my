@@ -123,7 +123,11 @@ fun buildSumExample(list: List<Int>) = list.joinToString(separator = " + ", post
  * по формуле abs = sqrt(a1^2 + a2^2 + ... + aN^2).
  * Модуль пустого вектора считать равным 0.0.
  */
-fun abs(v: List<Double>): Double = TODO()
+fun abs(v: List<Double>): Double {
+    var s =0.0
+    for(i in v.indices) s+=v[i].pow(2)
+    return sqrt(s)
+}
 
 /**
  * Простая (2 балла)
@@ -252,9 +256,9 @@ fun convert(n: Int, base: Int): List<Int> {
     var num = n
     while (num > 1) {
         numbers.add(num % base)
-        num/=base
+        num /= base
     }
-    if(num in 1..9) numbers.add(num)
+    if (num in 1..9) numbers.add(num)
     numbers.reverse()
     return numbers
 }
@@ -287,7 +291,6 @@ fun decimal(digits: List<Int>, base: Int): Int {
         num += digits[i] * base.toDouble().pow(deg).toInt()
     }
     return num
-}
 }
 
 /**
