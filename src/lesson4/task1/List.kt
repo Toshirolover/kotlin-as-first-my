@@ -4,7 +4,6 @@ package lesson4.task1
 
 import lesson1.task1.discriminant
 import lesson3.task1.isPrime
-import ru.spbstu.kotlin.typeclass.classes.Monoid.Companion.plus
 import kotlin.math.sqrt
 import kotlin.math.pow
 
