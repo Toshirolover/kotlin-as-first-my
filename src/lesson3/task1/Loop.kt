@@ -91,7 +91,17 @@ fun digitNumber(n: Int): Int {
  * Ряд Фибоначчи определён следующим образом: fib(1) = 1, fib(2) = 1, fib(n+2) = fib(n) + fib(n+1)
  */
 fun fib(n: Int): Int {
-    if (n > 2) return fib(n - 1) + fib(n - 2) else return 1
+    var num = 1
+    var c1 = 0
+    var c2 = 1
+    var answ = 1
+    while (num < n) {
+        answ = c1 + c2
+        c1 = c2
+        c2 = answ
+        num++
+    }
+    return answ
 }
 
 /**
@@ -102,7 +112,7 @@ fun fib(n: Int): Int {
 fun minDivisor(n: Int): Int {
     var diviver = 3
     if (n % 2 == 0) return 2
-    else while (n % diviver != 0) {
+    while (n % diviver != 0) {
         diviver += 2
     }
     return diviver
@@ -145,6 +155,7 @@ fun collatzSteps(x: Int): Int {
     }
     return num
 }
+
 /**
  * Средняя (3 балла)
  *
@@ -211,7 +222,7 @@ fun hasDifferentDigits(n: Int): Boolean {
     var lastNum = n % 10
     while (num > 0) {
         if (lastNum != num % 10) return true
-        else num /= 10
+        num /= 10
     }
     return false
 }
@@ -227,7 +238,7 @@ fun hasDifferentDigits(n: Int): Boolean {
  */
 fun sin(x: Double, eps: Double): Double {
     var degree = 1
-    var sin = x % (2 * Math.PI)
+    var sin = x % (2 * PI)
     val const = sin
     var num = sin
     while (abs(num) >= eps) {
@@ -270,6 +281,7 @@ fun cos(x: Double, eps: Double): Double {
  * Использовать операции со строками в этой задаче запрещается.
  */
 fun squareSequenceDigit(n: Int) = fullNum(n) { n -> sqr(n) }
+
 /**
  * Сложная (5 баллов)
  *

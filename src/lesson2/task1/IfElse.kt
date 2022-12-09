@@ -94,12 +94,12 @@ fun timeForHalfWay(
     val secondWay = v2 * t2
     val thirdWay = v3 * t3
     var halfWay = (firstWay + secondWay + thirdWay) / 2
-    if (halfWay < firstWay) return (halfWay / v1)
+    if (halfWay < firstWay) halfWay / v1
     else if (halfWay < (secondWay + firstWay)) {
         halfWay -= firstWay
-        return (halfWay / v2 + t1)
+        return halfWay / v2 + t1
     } else halfWay -= (firstWay + secondWay)
-    return (halfWay / v3 + t1 + t2)
+    return halfWay / v3 + t1 + t2
 }
 
 /**

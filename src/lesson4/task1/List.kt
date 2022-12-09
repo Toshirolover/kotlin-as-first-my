@@ -3,6 +3,7 @@
 package lesson4.task1
 
 import lesson1.task1.discriminant
+import lesson1.task1.sqr
 import lesson3.task1.isPrime
 import kotlin.math.sqrt
 import kotlin.math.pow
@@ -123,8 +124,8 @@ fun buildSumExample(list: List<Int>) = list.joinToString(separator = " + ", post
  * Модуль пустого вектора считать равным 0.0.
  */
 fun abs(v: List<Double>): Double {
-    var s =0.0
-    for(i in v.indices) s+=v[i].pow(2)
+    var s = 0.0
+    for (i in v.indices) s += sqr(v[i])
     return sqrt(s)
 }
 
@@ -148,10 +149,8 @@ fun mean(list: List<Double>): Double {
  */
 fun center(list: MutableList<Double>): MutableList<Double> {
     val a = mean(list)
-    if (list.isNotEmpty()) {
-        for (i in 0 until list.size) {
-            list[i] -= a
-        }
+    for (i in 0 until list.size) {
+        list[i] -= a
     }
     return list
 }
