@@ -95,7 +95,7 @@ fun dateStrToDigit(str: String): String {
     } catch (e: NumberFormatException) {
         return ""
     }
-    if ((date[1] == months[1]) && (date[0].toInt() > 29)) return ""
+    if ((date[1] == months[1]) && (date[0].toInt() > 28)) return ""
     return String.format(
         "%02d.%02d.%d", date[0].toInt(), months.indexOf(date[1]) + 1, date[2].toInt()
     )
