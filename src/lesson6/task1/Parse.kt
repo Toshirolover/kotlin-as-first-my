@@ -102,7 +102,7 @@ fun dateStrToDigit(str: String): String {
     val numberOfMonth = months.indexOf(date[1]) + 1
     if ((numberOfMonth == 2) && (date[2].toInt() % 4 != 0) && ((date[2].toInt() % 100 == 0) || (date[2].toInt() % 400 != 0)))
         if (date[0].toInt() > 28) return ""
-    if ((numberOfMonth == 2) && (date[2].toInt() > 29)) return ""
+    if ((numberOfMonth == 2) && (date[0].toInt() > 29)) return ""
     return String.format(
         "%02d.%02d.%d", date[0].toInt(), numberOfMonth, date[2].toInt()
     )
@@ -146,7 +146,7 @@ fun dateDigitToStr(digital: String): String {
     }
     if ((date[1].toInt() == 2) && (date[2].toInt() % 4 != 0) && ((date[2].toInt() % 100 == 0) || (date[2].toInt() % 400 != 0)))
         if (date[0].toInt() > 28) return ""
-    if ((date[1].toInt() == 2) && (date[2].toInt() > 29)) return ""
+    if ((date[1].toInt() == 2) && (date[0].toInt() > 29)) return ""
     return String.format(
         "%d %s %d", date[0].toInt(), months[date[1].toInt() - 1], date[2].toInt()
     )
