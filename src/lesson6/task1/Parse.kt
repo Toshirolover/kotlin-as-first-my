@@ -74,7 +74,33 @@ fun main() {
  * Обратите внимание: некорректная с точки зрения календаря дата (например, 30.02.2009) считается неверными
  * входными данными.
  */
-fun dateStrToDigit(str: String): String = TODO()
+fun dateStrToDigit(str: String): String {
+    val date = str.split(" ")
+    val months = listOf(
+        "января",
+        "февраля",
+        "марта",
+        "апреля",
+        "мая",
+        "июня",
+        "июля",
+        "августа",
+        "сентября",
+        "октября",
+        "ноября",
+        "декабря"
+    )
+    try {
+        if ((date.count() != 3) || (date[0].toInt() !in 1..31) || (date[1] !in months) || (date[2].toInt() < 0)) return ""
+    } catch (e: NumberFormatException) {
+        return ""
+    }
+    if ((date[1] == months[1]) && (date[0].toInt() > 28)) return ""
+    return String.format(
+        "%02d.%02d.%d", date[0].toInt(), months.indexOf(date[1]) + 1, date[2].toInt()
+    )
+
+}
 
 /**
  * Средняя (4 балла)
@@ -86,7 +112,33 @@ fun dateStrToDigit(str: String): String = TODO()
  * Обратите внимание: некорректная с точки зрения календаря дата (например, 30 февраля 2009) считается неверными
  * входными данными.
  */
-fun dateDigitToStr(digital: String): String = TODO()
+fun dateDigitToStr(digital: String): String {
+    val date = digital.split(".")
+    val months = listOf(
+        "января",
+        "февраля",
+        "марта",
+        "апреля",
+        "мая",
+        "июня",
+        "июля",
+        "августа",
+        "сентября",
+        "октября",
+        "ноября",
+        "декабря"
+    )
+    try {
+        if ((date.count() != 3) || (date[0].toInt() !in 1..31) || (date[1].toInt() !in 1..12) || (date[2].toInt() < 0)) return ""
+    } catch (e: NumberFormatException) {
+        return ""
+    }
+    if ((date[1] == "02") && (date[0].toInt() > 28)) return ""
+    return String.format(
+        "%d %s %d", date[0].toInt(), months[date[1].toInt() - 1], date[2].toInt()
+    )
+
+}
 
 /**
  * Средняя (4 балла)
@@ -102,7 +154,11 @@ fun dateDigitToStr(digital: String): String = TODO()
  *
  * PS: Дополнительные примеры работы функции можно посмотреть в соответствующих тестах.
  */
-fun flattenPhoneNumber(phone: String): String = TODO()
+fun flattenPhoneNumber(phone: String): String {
+    val result = Regex("""[-\s]""").replace(phone, "")
+    if (result.matches(Regex("""^(\+[0-9]+)?(\([0-9]+\))?([0-9]+)$"""))) return Regex("""[()]""").replace(result, "")
+    return ""
+}
 
 /**
  * Средняя (5 баллов)
