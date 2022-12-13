@@ -76,6 +76,7 @@ fun main() {
  */
 fun dateStrToDigit(str: String): String {
     val date = str.split(" ")
+    val miss = listOf(4, 6, 9, 11)
     val months = listOf(
         "января",
         "февраля",
@@ -94,6 +95,9 @@ fun dateStrToDigit(str: String): String {
         if ((date.count() != 3) || (date[0].toInt() !in 1..31) || (date[1] !in months) || (date[2].toInt() < 0)) return ""
     } catch (e: NumberFormatException) {
         return ""
+    }
+    for (i in miss) {
+        if ((date[1] == months[i - 1]) && (date[0].toInt() > 30)) return ""
     }
     if ((date[1] == months[1]) && (date[0].toInt() > 28)) return ""
     return String.format(
@@ -114,6 +118,7 @@ fun dateStrToDigit(str: String): String {
  */
 fun dateDigitToStr(digital: String): String {
     val date = digital.split(".")
+    val miss = listOf("04", "06", "09", "11")
     val months = listOf(
         "января",
         "февраля",
@@ -132,6 +137,9 @@ fun dateDigitToStr(digital: String): String {
         if ((date.count() != 3) || (date[0].toInt() !in 1..31) || (date[1].toInt() !in 1..12) || (date[2].toInt() < 0)) return ""
     } catch (e: NumberFormatException) {
         return ""
+    }
+    for (i in miss) {
+        if ((date[1] == i) && (date[0].toInt() > 30)) return ""
     }
     if ((date[1] == "02") && (date[0].toInt() > 29)) return ""
     return String.format(
@@ -156,7 +164,9 @@ fun dateDigitToStr(digital: String): String {
  */
 fun flattenPhoneNumber(phone: String): String {
     val result = Regex("""[-\s]""").replace(phone, "")
-    if (result.matches(Regex("""^(\+[0-9]+)?(\([0-9]+\))?([0-9]+)$"""))) return Regex("""[()]""").replace(result, "")
+    if (result.matches(Regex("""^(\+[0-9]+)?(\([0-9]+\))?([0-9]+)$"""))) return Regex("""[()]""").replace(
+        result, ""
+    )
     return ""
 }
 
