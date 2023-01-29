@@ -186,7 +186,16 @@ fun flattenPhoneNumber(phone: String): String {
  * Прочитать строку и вернуть максимальное присутствующее в ней число (717 в примере).
  * При нарушении формата входной строки или при отсутствии в ней чисел, вернуть -1.
  */
-fun bestLongJump(jumps: String): Int = TODO()
+fun bestLongJump(jumps: String): Int {
+    if (jumps.contains(Regex("""([%\-])(%|-|\d)|(%|-|\d)([%\-])""")) || jumps.contains(Regex("""[^\d\s\-%]""")))
+        return -1
+    val attempts = Regex("""[\s\-%]""").split(jumps)
+    var maxOfAttempts = -1
+    for (attempt in attempts)
+        if ((attempt.isNotEmpty()) && (attempt.toInt() > maxOfAttempts))
+            maxOfAttempts = attempt.toInt()
+    return maxOfAttempts
+}
 
 /**
  * Сложная (6 баллов)
@@ -210,7 +219,23 @@ fun bestHighJump(jumps: String): Int = TODO()
  * Вернуть значение выражения (6 для примера).
  * Про нарушении формата входной строки бросить исключение IllegalArgumentException
  */
-fun plusMinus(expression: String): Int = TODO()
+fun plusMinus(expression: String): Int {
+    if (!"$expression + ".matches(Regex("""(\d+ [+-] )+"""))) {
+        throw IllegalArgumentException(expression)
+    }
+    val symbols = Regex(""" """).split(expression)
+    var result = symbols[0].toInt()
+    var i = 1
+    while (i in 1 until symbols.size) {
+        result += symbols[i + 1].toInt() *
+                when (symbols[i]) {
+                    "+" -> 1
+                    else -> -1
+                }
+        i += 2
+    }
+    return result
+}
 
 /**
  * Сложная (6 баллов)
@@ -221,7 +246,17 @@ fun plusMinus(expression: String): Int = TODO()
  * Вернуть индекс начала первого повторяющегося слова, или -1, если повторов нет.
  * Пример: "Он пошёл в в школу" => результат 9 (индекс первого 'в')
  */
-fun firstDuplicateIndex(str: String): Int = TODO()
+fun firstDuplicateIndex(str: String): Int {
+    val letters = Regex(""" """).split(str)
+    if (letters.size < 2) return -1
+    var answ = 0
+    for (i in 0 until letters.size - 1) {
+        if (letters[i].toLowerCase() == letters[i + 1].toLowerCase())
+            return answ
+        answ += letters[i].length + 1
+    }
+    return -1
+}
 
 /**
  * Сложная (6 баллов)
@@ -286,3 +321,4 @@ fun fromRoman(roman: String): Int = TODO()
  *
  */
 fun computeDeviceCells(cells: Int, commands: String, limit: Int): List<Int> = TODO()
+
