@@ -92,6 +92,11 @@ fun dateStrToDigit(str: String): String {
         "декабря"
     )
     try {
+        //if (Regex("""^([1-9]|[1-2][\d]|3[0-2])${'$'}""").matches(date[0]) == null ||
+        //date.count() != 3 ||
+        //date[1] !in months ||
+        //Regex("""\d+""").matches(date[2])
+        //) return ""
         if ((date.count() != 3) || (date[0].toInt() !in 1..31) || (date[1] !in months) || (date[2].toInt() < 0)) return ""
     } catch (e: NumberFormatException) {
         return ""
@@ -137,6 +142,11 @@ fun dateDigitToStr(digital: String): String {
         "декабря"
     )
     try {
+        //if (date.count() != 3 ||
+        //Regex("""^([1-9]|[1-2][\d]|3[0-2])${'$'}""").matches(date[0]) == null ||
+        //Regex("""^([1-9]|1[0-2])$""").matches(date[1]) == null ||
+        //Regex("""\d+""").matches(date[2])
+        //) return ""
         if ((date.count() != 3) || (date[0].toInt() !in 1..31) || (date[1].toInt() !in 1..12) || (date[2].toInt() < 0)) return ""
     } catch (e: NumberFormatException) {
         return ""

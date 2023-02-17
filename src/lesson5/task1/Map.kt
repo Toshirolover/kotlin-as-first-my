@@ -202,7 +202,7 @@ fun findCheapestStuff(stuff: Map<String, Pair<String, Double>>, kind: String): S
     var price = -1.0
     for ((key) in stuff){
         var m = stuff[key]?.second ?: return null
-        if (stuff[key]?.first == kind && ((price > m) || (price == -1.0))) {
+        if (stuff[key]?.first == kind && (price > m || price == -1.0)) {
             call = key
             price = stuff[key]?.second ?: return null
         }

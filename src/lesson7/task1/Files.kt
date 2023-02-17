@@ -78,12 +78,13 @@ fun deleteMarked(inputName: String, outputName: String) {
 fun countSubstrings(inputName: String, substrings: List<String>): Map<String, Int> {
     val text = File(inputName).readText().toLowerCase()
     val result = mutableMapOf<String, Int>()
-    val lSubstrings = substrings.toList()
-    for (i in lSubstrings.indices) {
-        result[lSubstrings[i]] = 0
-        for (k in text.indices)
-            if (text.startsWith(lSubstrings[i].toLowerCase(), k))
-                result[lSubstrings[i]] = result[lSubstrings[i]]!! + 1
+    for (i in substrings.indices) {
+        result[substrings[i]] = 0
+        for (k in text.indices) {
+            val start = substrings[i].toLowerCase()
+            if (text.startsWith(start, k))
+                result[substrings[i]] = result[substrings[i]]!! + 1
+        }
     }
     return result
 }
@@ -103,7 +104,7 @@ fun countSubstrings(inputName: String, substrings: List<String>): Map<String, In
  *
  */
 fun sibilants(inputName: String, outputName: String) {
-    val Letters = listOf('ж', 'ч', 'ш', 'щ')
+    val letters = listOf('ж', 'ч', 'ш', 'щ')
     val needToReplace = mapOf('ы' to 'и', 'я' to 'а', 'ю' to 'у')
     val result = File(outputName).bufferedWriter()
     for (line in File(inputName).readLines()) {
@@ -111,10 +112,10 @@ fun sibilants(inputName: String, outputName: String) {
         var addInLine = ""
         for (i in line.indices)
             if (addInLine == "") {
-                if ((line[i].toLowerCase() in Letters) && (i != line.length - 1))
-                    if (line[i + 1] in needToReplace.keys)
+                if ((line[i].toLowerCase() in letters) && (i != line.length - 1))
+                    if (line[i + 1] in needToReplace)
                         addInLine = needToReplace[line[i + 1]].toString()
-                    else if (line[i + 1].toLowerCase() in needToReplace.keys)
+                    else if (line[i + 1].toLowerCase() in needToReplace)
                         addInLine = needToReplace[line[i + 1].toLowerCase()].toString().toUpperCase()
                 newLine += line[i].toString() + addInLine
             } else
