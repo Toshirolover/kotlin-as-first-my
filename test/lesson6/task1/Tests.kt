@@ -153,3 +153,24 @@ class Tests {
         assertThrows(IllegalStateException::class.java) { computeDeviceCells(20, ">>>>>>>>>>>>>", 12) }
     }
 }
+fun matrixes(matrix: List<List<Int>>): String {
+    var counts = 0
+    var newMatrix = ""
+    for (i in matrix.indices) {
+        val line = matrix[i]
+        val counstNext = matrix[i + 1].count()
+        counts = line.count()
+        if (counts != counstNext) throw IllegalArgumentException()
+        for (k in line.indices)
+            if (line[k] == line[k + 1]) throw IllegalArgumentException()
+    }
+    for (number in 0..counts) {
+        for (i in matrix.indices) {
+            if(matrix[i][number] == matrix[i+1][number]) throw IllegalArgumentException()
+            newMatrix += matrix[i][number].toString() + " "
+        }
+        newMatrix += "\n"
+    }
+    println(newMatrix)
+    return newMatrix
+}
