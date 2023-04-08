@@ -80,8 +80,8 @@ fun countSubstrings(inputName: String, substrings: List<String>): Map<String, In
     val result = mutableMapOf<String, Int>()
     for (i in substrings.indices) {
         result[substrings[i]] = 0
+        val start = substrings[i].toLowerCase()
         for (k in text.indices) {
-            val start = substrings[i].toLowerCase()
             if (text.startsWith(start, k))
                 result[substrings[i]] = result[substrings[i]]!! + 1
         }
@@ -108,19 +108,21 @@ fun sibilants(inputName: String, outputName: String) {
     val needToReplace = mapOf('ы' to 'и', 'я' to 'а', 'ю' to 'у')
     val result = File(outputName).bufferedWriter()
     for (line in File(inputName).readLines()) {
-        var newLine = ""
-        var addInLine = ""
+        val newLine = StringBuilder("")
+        var addInLine = '\u0000'
         for (i in line.indices)
-            if (addInLine == "") {
+            if (addInLine == '\u0000') {
                 if ((line[i].toLowerCase() in letters) && (i != line.length - 1))
                     if (line[i + 1] in needToReplace)
-                        addInLine = needToReplace[line[i + 1]].toString()
+                        addInLine = needToReplace[line[i + 1]]!!.toChar()
                     else if (line[i + 1].toLowerCase() in needToReplace)
-                        addInLine = needToReplace[line[i + 1].toLowerCase()].toString().toUpperCase()
-                newLine += line[i].toString() + addInLine
+                        addInLine = needToReplace[line[i + 1].toLowerCase()]!!.toChar().toUpperCase()
+                if (addInLine == '\u0000')
+                    newLine.append(line[i].toString())
+                else newLine.append(line[i].toString() + addInLine)
             } else
-                addInLine = ""
-        result.write(newLine)
+                addInLine = '\u0000'
+        result.write(newLine.toString())
         result.newLine()
     }
     result.close()

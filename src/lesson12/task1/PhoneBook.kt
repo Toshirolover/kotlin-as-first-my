@@ -2,6 +2,10 @@
 
 package lesson12.task1
 
+import ru.spbstu.wheels.NullableMonad.map
+import java.lang.IllegalArgumentException
+import java.util.IllegalFormatException
+
 /**
  * Класс "Телефонная книга".
  *
@@ -18,13 +22,22 @@ package lesson12.task1
  * Класс должен иметь конструктор по умолчанию (без параметров).
  */
 class PhoneBook {
+    private val mapOfPeople: MutableMap<String, MutableList<String>> = mutableMapOf()
+
     /**
      * Добавить человека.
      * Возвращает true, если человек был успешно добавлен,
      * и false, если человек с таким именем уже был в телефонной книге
      * (во втором случае телефонная книга не должна меняться).
      */
-    fun addHuman(name: String): Boolean = TODO()
+    fun addHuman(name: String): Boolean {
+        if (!Regex("""[А-Я][а-я]*\s[А-Я][а-я]*""").matches(name)) throw IllegalArgumentException()
+        if (!mapOfPeople.containsKey(name)) {
+            val a = mutableListOf<String>()
+            mapOfPeople[name] = a
+            return true
+        } else return false
+    }
 
     /**
      * Убрать человека.
@@ -32,7 +45,14 @@ class PhoneBook {
      * и false, если человек с таким именем отсутствовал в телефонной книге
      * (во втором случае телефонная книга не должна меняться).
      */
-    fun removeHuman(name: String): Boolean = TODO()
+    fun removeHuman(name: String): Boolean {
+        if (!Regex("""[А-Я][а-я]*\s[А-Я][а-я]*""").matches(name)) throw IllegalArgumentException()
+        if (mapOfPeople.containsKey(name)) {
+            mapOfPeople.remove(name)
+            return true
+        }
+        return false
+    }
 
     /**
      * Добавить номер телефона.
